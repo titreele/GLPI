@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#27444a">
+  <meta name="description" content="Central de suporte interno da Treèle.">
+  <title>Central de Suporte | Treèle</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2327444a'/%3E%3Cpath d='M13 17 32 6l19 11v22L32 50 13 39z' fill='none' stroke='%23fff' stroke-width='7'/%3E%3Cpath d='m18 22 14-8 14 8-14 8z' fill='%23d9db15'/%3E%3C/svg%3E">
+  <style>
+    :root { color-scheme: light; --green:#27444a; --deep:#1d363b; --lime:#d9db15; --blue:#00a7df; --cream:#f4f1e8; --ink:#253c42; --muted:#748286; --line:#e2e3dd; }
+    * { box-sizing:border-box; }
+    html { min-height:100%; background:var(--cream); }
+    body { min-height:100vh; margin:0; color:var(--ink); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:radial-gradient(circle at 86% 10%,rgba(0,167,223,.09),transparent 29rem),radial-gradient(circle at 8% 92%,rgba(217,219,21,.11),transparent 27rem),var(--cream); }
+    a { color:inherit; }
+    .page { width:min(1120px,calc(100% - 36px)); min-height:100vh; margin:0 auto; display:grid; place-items:center; padding:54px 0 30px; }
+    .wrap { width:100%; }
+    .portal { min-height:590px; display:grid; grid-template-columns:.86fr 1.14fr; overflow:hidden; border:1px solid rgba(39,68,74,.08); border-radius:30px; background:#fff; box-shadow:0 28px 80px rgba(37,60,66,.16); }
+    .brand-panel { position:relative; overflow:hidden; padding:clamp(38px,5vw,62px); display:flex; flex-direction:column; justify-content:space-between; background:var(--green); color:#fff; }
+    .brand-panel::before,.brand-panel::after { content:""; position:absolute; border-radius:50%; pointer-events:none; }
+    .brand-panel::before { width:310px; height:310px; right:-190px; top:-170px; border:50px solid rgba(0,167,223,.13); }
+    .brand-panel::after { width:250px; height:250px; left:-155px; bottom:-150px; border:42px solid rgba(217,219,21,.12); }
+    .logo { position:relative; z-index:1; width:min(210px,78%); height:auto; }
+    .brand-copy { position:relative; z-index:1; }
+    .brand-copy p { margin:0 0 13px; color:rgba(255,255,255,.68); font-size:.78rem; font-weight:800; letter-spacing:.15em; text-transform:uppercase; }
+    .brand-copy h1 { max-width:390px; margin:0; font-size:clamp(2.65rem,5vw,4.85rem); line-height:.96; letter-spacing:-.055em; }
+    .brand-copy h1 span { color:var(--lime); }
+    .content { padding:clamp(38px,6vw,76px); display:flex; flex-direction:column; justify-content:center; }
+    .eyebrow { margin:0 0 13px; color:var(--blue); font-size:.78rem; font-weight:850; letter-spacing:.14em; text-transform:uppercase; }
+    h2 { max-width:550px; margin:0; color:var(--green); font-size:clamp(2rem,4vw,3.4rem); line-height:1.03; letter-spacing:-.05em; }
+    .lead { max-width:540px; margin:21px 0 30px; color:var(--muted); font-size:1.05rem; line-height:1.65; }
+    .login-actions { max-width:430px; display:grid; gap:12px; }
+    .button { width:100%; min-height:58px; padding:0 25px; border:1px solid transparent; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; gap:12px; background:var(--green); color:#fff; font-size:1rem; font-weight:780; text-decoration:none; box-shadow:0 14px 30px rgba(39,68,74,.18); transition:transform .18s ease,background .18s ease,box-shadow .18s ease; }
+    .button:hover { transform:translateY(-2px); background:var(--deep); box-shadow:0 18px 36px rgba(39,68,74,.24); }
+    .button.secondary { border-color:#cfd8da; background:#fff; color:var(--green); box-shadow:none; }
+    .button.secondary:hover { border-color:var(--green); background:#f8faf9; box-shadow:none; }
+    .button svg { width:20px; height:20px; }
+    .ms-mark { width:20px; height:20px; display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+    .ms-mark i:nth-child(1){background:#f35325}.ms-mark i:nth-child(2){background:#81bc06}.ms-mark i:nth-child(3){background:#05a6f0}.ms-mark i:nth-child(4){background:#ffba08}
+    .recovery-links { display:flex; flex-wrap:wrap; justify-content:center; gap:6px 16px; margin-top:2px; }
+    .forgot { color:var(--muted); font-size:.82rem; font-weight:650; text-underline-offset:3px; }
+    .button:focus-visible,.utility a:focus-visible { outline:3px solid rgba(0,167,223,.36); outline-offset:4px; }
+    .steps { margin:34px 0 0; padding:29px 0 0; border-top:1px solid var(--line); display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .step { min-width:0; }
+    .step b { width:30px; height:30px; margin-bottom:11px; border-radius:9px; display:grid; place-items:center; background:rgba(0,167,223,.1); color:var(--green); font-size:.82rem; }
+    .step strong { display:block; margin-bottom:4px; color:var(--ink); font-size:.88rem; }
+    .step span { color:var(--muted); font-size:.78rem; line-height:1.45; }
+    .utility { padding:20px 5px 0; display:flex; justify-content:space-between; gap:18px; color:var(--muted); font-size:.82rem; }
+    .utility a { text-underline-offset:3px; }
+    @media (max-width:850px) { .page{padding-top:24px}.portal{grid-template-columns:1fr}.brand-panel{min-height:300px;gap:60px}.brand-copy h1{max-width:520px} }
+    @media (max-width:560px) { .page{width:min(100% - 24px,1120px);padding-bottom:20px}.portal{border-radius:22px}.brand-panel{min-height:265px;padding:32px 28px}.logo{width:165px}.content{padding:38px 28px 42px}.button{width:100%}.steps{grid-template-columns:1fr;gap:17px}.step{display:grid;grid-template-columns:38px 1fr;column-gap:8px}.step b{grid-row:span 2}.utility{flex-direction:column;align-items:center;text-align:center} }
+    @media (prefers-reduced-motion:reduce) { * { transition:none!important; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="wrap">
+      <section class="portal" aria-labelledby="page-title">
+        <div class="brand-panel">
+          <img class="logo" src="assets/logo-treele.png" alt="Treèle Construtora">
+          <div class="brand-copy"><p>Portal interno</p><h1>Suporte que acompanha você<span>.</span></h1></div>
+        </div>
+        <div class="content">
+          <p class="eyebrow">Central de suporte</p>
+          <h2 id="page-title">Como podemos ajudar?</h2>
+          <p class="lead">Abra uma solicitação para a equipe de TI e acompanhe o atendimento em um só lugar.</p>
+          <div class="login-actions">
+            <a class="button" href="https://treele.us5.glpi-network.cloud/plugins/oauthsso/front/login.php?plugin_oauthsso_applications_id=1&amp;redirect=">
+              <span class="ms-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              Entrar com Microsoft
+            </a>
+            <a class="button secondary" href="https://treele.us5.glpi-network.cloud/">Entrar com usuário e senha</a>
+            <div class="recovery-links">
+              <a class="forgot" href="https://passwordreset.microsoftonline.com/">Esqueci a senha Microsoft</a>
+              <a class="forgot" href="https://treele.us5.glpi-network.cloud/front/lostpassword.php?lostpassword=1">Recuperar senha do GLPI</a>
+            </div>
+          </div>
+          <div class="steps" aria-label="Como funciona">
+            <div class="step"><b>1</b><strong>Acesse</strong><span>Use sua conta corporativa.</span></div>
+            <div class="step"><b>2</b><strong>Solicite</strong><span>Escolha o formulário ideal.</span></div>
+            <div class="step"><b>3</b><strong>Acompanhe</strong><span>Consulte respostas e andamento.</span></div>
+          </div>
+        </div>
+      </section>
+      <footer class="utility"><span>Central interna de suporte · Treèle Construtora</span><a href="https://treele.com.br/">Site institucional</a></footer>
+    </div>
+  </main>
+</body>
+</html>
